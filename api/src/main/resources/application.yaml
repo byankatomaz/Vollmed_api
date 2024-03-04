@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/vollmed_api
+    username: root
+
+
+
+  jpa:
+    show-sql: true
+
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8056
+
+  error:
+    include-stacktrace: never
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:12345678}
