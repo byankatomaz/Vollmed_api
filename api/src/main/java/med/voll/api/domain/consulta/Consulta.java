@@ -36,4 +36,9 @@ public class Consulta {
     private LocalDateTime data;
 
     private Boolean ativo;
+
+    public void cancelar(MotivoCancelamento motivo) {
+        this.motivoCancelamento = motivo;
+        this.ativo = false;
+    }
 }
