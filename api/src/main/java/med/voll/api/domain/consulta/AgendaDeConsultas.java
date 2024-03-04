@@ -26,6 +26,9 @@ public class AgendaDeConsultas {
     @Autowired
     private List<ValidadorAgendamentoConsulta> validadores;
 
+    @Autowired
+    private List<ValidadorCancelamentoDeConsulta> validadoresCancelamento;
+
     public DadosDetalhamentoConsulta agendar(DadosAgendamentoConsulta dados){
 
         if (!pacienteRepository.existsById(dados.idPaciente())){
@@ -61,4 +64,17 @@ public class AgendaDeConsultas {
 
     }
 
+    public DadosDetalhamentoCancelamentoConsulta cancelar(DadosCancelamentoConsulta dados){
+        if (!consultaRepository.existsById(dados.idConsulta())){
+            throw new ValidacaoException("Id da consulta não existe");
+        };
+
+        validadoresCancelamento.forEach(v -> v.validar(dados));
+
+        var consulta = consultaRepository.getReferenceById(dados.idConsulta());
+
+        consulta.cancelar(dados.motivoCancelamento());
+
+        return new DadosDetalhamentoCancelamentoConsulta(consulta);
+    }
 }
