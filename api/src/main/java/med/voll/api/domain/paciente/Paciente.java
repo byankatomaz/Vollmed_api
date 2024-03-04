@@ -48,4 +48,8 @@ public class Paciente {
 
     }
 
+    public void excluir(){
+        this.ativo = false;
+    }
+
 }
